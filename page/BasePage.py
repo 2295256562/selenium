@@ -12,14 +12,15 @@ class BasePage(object):
     封装常用的selenium方法
     """
 
-    def __init__(self, browser_type='chrome'):
+    def __init__(self, browser_type=None):
         """
         打开浏览器
         :param browser_type:
         """
         if browser_type == 'chrome':
-            self.driver = webdriver.Chrome()
+            self.driver = webdriver.Chrome(u'D:\Python代码\selenium\cases\chromedriver.exe')
         elif browser_type == 'firefox':
+            path ='D:/Python代码/selenium/page/geckodriver.exe'
             self.driver = webdriver.Firefox()
         elif browser_type == 'safari':
             self.driver = webdriver.Safari()
@@ -128,9 +129,6 @@ class BasePage(object):
         """
         self.driver.quit()
 
+    def max_windows(self):
+        self.driver.maximize_window()
 
-
-
-if __name__ == '__main__':
-    BA = BasePage('firefox')
-    BA.navigate('www.baidu.com')

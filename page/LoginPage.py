@@ -4,21 +4,27 @@ from page.indexPage import IndexPage
 
 class LoginPage(BasePage):
 
-    def username_field(self):
-        """username 输入框"""
-        return self.getElenment(By.NAME, 'username')
-
-    def password_field(self):
-        """password 输入框"""
-        return self.getElenment(By.NAME, 'password')
-
     def login_btn(self):
-        return self.getElenment(By.NAME, 'submit')
+        """登录按钮"""
+        return self.click('js-signin-btn')
+
+
+    def usernameInput(self, username):
+        return self.input('name=>email', username)
+
+    def passwordInput(self, password):
+        return self.input('name=>password', password)
+
+    def loginBtn(self):
+        return self.click('css=>.moco-btn-lg')
+
+
 
     def login_success(self, username, password):
-        self.username_field().send_keys(username)
-        self.password_field().send_keys(password)
-        self.login_btn().click()
 
-        ## 返回登录成功的页面,首页
-        return IndexPage(self.driver)
+        self.login_btn()
+        self.sleep(2)
+        self.usernameInput(username)
+        self.sleep(1)
+        self.passwordInput(password)
+        self.loginBtn()

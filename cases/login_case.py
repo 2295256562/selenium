@@ -7,14 +7,20 @@ from page.BasePage import BasePage
 from page.LoginPage import LoginPage
 
 
-class LoginCase(unittest.TestCase):
-    def setUp(self):
-        self.dr = BasePage()
+class Mytest(unittest.TestCase):
 
-    def test_login_success(self):
-        username = '17671105406'
-        password = 'yuanman99'
-        login_page = LoginPage(self.dr, '/signin?next=%2F')
+    def setUp(self) -> None:
+        self.dr = BasePage('firefox')
+        self.dr.max_windows()
+        self.dr.navigate('https://www.imooc.com/')
 
-        index_Page = login_page.login_success(username=username, password=password)
-        self.assertTrue(username in index_Page)
+
+
+
+
+
+
+    def tearDown(self) -> None:
+        self.dr.quit()
+if __name__ == '__main__':
+    unittest.main()
